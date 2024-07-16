@@ -1,8 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import { connectDB } from "@/util/database"
 
-export default function Home() {
+export default async function Home() {
+  const db = (await connectDB).db('forum');
+  let result = await db.collection('post').find().toArray();
   return (
-    <div>main</div>
-  );
+    <main>
+      메인화면입니다
+      <Link href='list'>list</Link>
+    </main>
+  )
 }
+
